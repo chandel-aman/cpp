@@ -8,6 +8,19 @@ at every call of the function iterating over each of the elements of the sets we
 2) to exclude the element and move to backtracking
  */
 
+/*
+                  RECURSIVE TREE
+          
+                           [ ]
+                    /              \
+                  []                [1]                   i=0
+                 /   \           /        \
+              []     [2]       [1]        [1,2]           i=1
+             / \     /  \     /   \       /   \
+           []  [3] [2] [2,3] [1] [1,3] [1,2] [1,2,3]      i=2
+
+*/
+
 #include <bits/stdc++.h>
 using namespace std;
 
