@@ -1,49 +1,59 @@
 #include <bits/stdc++.h>
-
 using namespace std;
 
-// function to find the pivot in the array
-
-int partition(vector<int> &ar, int start, int end)
+// Display function
+void display(vector<int> &arr)
 {
-    //choosing the pivot element as the last element
-    int pivot = ar[end];
-    //pointer
-    int low = start - 1;
+    for (int i : arr)
+        cout << i << " ";
+    cout << endl;
+}
 
-    for(int i = start; i<end; i++){
-        if(ar[i]<pivot){
-            
+// Function to implement to find the pivot
+int partition(vector<int> &arr, int start, int high)
+{
+    int pivot = arr[start];
+    int i = start;
+    int j = high;
+    while (i < j)
+    {
+        while (i <= high - 1 && arr[i] <= pivot)
+        {
+            i++;
+        }
+        while (j >= start + 1 && arr[j] >= pivot)
+        {
+            j--;
+        }
+        if (i < j)
+        {
+            swap(arr[i], arr[j]);
         }
     }
+    swap(arr[start], arr[j]);
 
+    return j;
 }
 
-// function to sort using quick sort algorithm
-void quickSort(vector<int> &ar, int start, int end)
+// Quick Sort
+void quickSort(vector<int> &arr, int start, int high)
 {
-    int p = partition(ar, start, end);
-    quickSort(ar, start, p);
-    quickSort(ar, p + 1, end);
-}
-
-// function to display the array elements
-void display(vector<int> &ar)
-{
-    for (int i : ar)
-        cout << i << " ";
-    
-    cout << endl;
+    if (start < high)
+    {
+        int pivot = partition(arr, start, high);
+        quickSort(arr, start, pivot);
+        quickSort(arr, pivot + 1, high);
+    }
 }
 
 // main function
 int main()
 {
-    vector<int> arr = {4, 1, 9, 12, 0, 45, 3, 8};
-    cout << "Before sorting: ";
+    vector<int> arr = {3, 2, 1, 5, 6, 4};
+    cout << "Before sorting" << endl;
     display(arr);
-    quickSort(arr, 0, 7);
-    cout << "After sorting: ";
+    quickSort(arr, 0, arr.size() - 1);
+    cout << "After sorting" << endl;
     display(arr);
 
     return 0;
